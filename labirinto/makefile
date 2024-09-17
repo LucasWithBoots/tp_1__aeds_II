@@ -18,8 +18,8 @@ CC=gcc
 CC_FLAGS=-c         \
          -W         \
          -Wall      \
-         -ansi      \
-         -pedantic
+         -pedantic  \
+         -std=c99
 
 # Comando utilizado no target clean
 RM = rm -rf
