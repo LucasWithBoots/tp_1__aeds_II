@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define TAMANHO_LABIRINTO 10
+#define TAMANHO_LINHA 100
 
 // Estrutura para representar uma posição no labirinto
 typedef struct Posicao {
@@ -88,24 +89,51 @@ void imprimirCaminho(Pilha *pilha) {
     }
 }
 
-int main() {
-    char labirinto[TAMANHO_LABIRINTO][TAMANHO_LABIRINTO] = {
-        {'X', 'X', '0', '0', '0', '0', 'S', 'X', 'X', 'X'},
-        {'0', '0', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
-        {'0', 'X', '0', '0', '0', '0', 'X', '0', '0', '0'},
-        {'0', 'X', '0', 'X', 'X', '0', 'X', '0', 'X', '0'},
-        {'0', 'X', '0', 'X', 'X', '0', '0', '0', 'X', '0'},
-        {'0', 'X', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
-        {'0', 'X', '0', '0', '0', '0', '0', 'X', 'X', 'X'},
-        {'0', 'X', 'X', 'X', 'X', 'X', '0', 'X', 'X', 'X'},
-        {'0', '0', '0', 'X', 'X', '0', '0', '0', 'X', 'X'},
-        {'0', 'X', 'X', 'X', 'X', '0', 'X', 'E', 'X', 'X'}
-    };
+// Função para ler o labirinto de um arquivo
+int lerLabirinto(char labirinto[TAMANHO_LABIRINTO][TAMANHO_LABIRINTO], const char *caminhoArquivo) {
+    FILE *arquivo = fopen(caminhoArquivo, "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo %s\n", caminhoArquivo);
+        return 0;
+    }
 
+    char linha[TAMANHO_LINHA];
+    int contadorLinha = 0;
+
+    while (fgets(linha, TAMANHO_LINHA, arquivo) != NULL && contadorLinha < TAMANHO_LABIRINTO) {
+        // Remover o caractere de nova linha, se presente
+        linha[strcspn(linha, "\n")] = '\0';
+        // Copiar os caracteres para o labirinto
+        for (int i = 0; i < TAMANHO_LABIRINTO && i < strlen(linha); i++) {
+            labirinto[contadorLinha][i] = linha[i];
+        }
+        contadorLinha++;
+    }
+
+    fclose(arquivo);
+
+    if (contadorLinha != TAMANHO_LABIRINTO) {
+        printf("O labirinto deve ter exatamente %d linhas.\n", TAMANHO_LABIRINTO);
+        return 0;
+    }
+
+    return 1;
+}
+
+int main() {
+    char labirinto[TAMANHO_LABIRINTO][TAMANHO_LABIRINTO];
     int visitado[TAMANHO_LABIRINTO][TAMANHO_LABIRINTO];
     memset(visitado, 0, sizeof(visitado));
 
+    const char *caminhoArquivo = "../labirintos/labirinto1.txt"; // Caminho
+
+    // Ler o labirinto do arquivo
+    if (!lerLabirinto(labirinto, caminhoArquivo)) {
+        return 1;
+    }
+
     int linhaInicio, colunaInicio, linhaFim, colunaFim;
+    int encontrouInicio = 0, encontrouFim = 0;
 
     // Encontrar a posição inicial 'E' e a posição final 'S'
     for (int linha = 0; linha < TAMANHO_LABIRINTO; linha++) {
@@ -113,12 +141,19 @@ int main() {
             if (labirinto[linha][coluna] == 'E') {
                 linhaInicio = linha;
                 colunaInicio = coluna;
+                encontrouInicio = 1;
             }
             if (labirinto[linha][coluna] == 'S') {
                 linhaFim = linha;
                 colunaFim = coluna;
+                encontrouFim = 1;
             }
         }
+    }
+
+    if (!encontrouInicio || !encontrouFim) {
+        printf("O labirinto deve conter uma posição inicial 'E' e uma posição final 'S'.\n");
+        return 1;
     }
 
     Pilha pilha;
