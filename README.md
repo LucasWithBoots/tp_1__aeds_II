@@ -1,6 +1,6 @@
 # Tarefa Prática 1 - AEDs II
 
-![alt text](image.png)
+![header](public/image.png)
 
 ## Alunos
 
