@@ -10,9 +10,18 @@
 
 ## Informações importantes
 
+### Onde consigo achar o relatório?
+
+O relatório em PDF pode ser encontrado dentra da pasta `public` com o nome `relatorio.pdf`.
+
 ### Como mudar o labirinto que será lido?
 
-Dentro da função `main` do arquivo `source/main.c` existe uma constante chamada `caminhoArquivo`. O projeto tentara encontrar o labirinto indicado nesta constante.
+Dentro da função `main` do arquivo `source/main.c` existe uma constante chamada `caminhoArquivo`. O projeto tentará encontrar o labirinto indicado nesta constante.
+
+### `labirinto` x `labirintos`
+
+- `labirinto` armazena o código do projeto e o Makefile
+- `labirintos` armazena os labirintos em .txt disponibilizados pelo professor
 
 ## Como executar
 
