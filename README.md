@@ -1,5 +1,7 @@
 # Tarefa Prática 1 - AEDs II
 
+![alt text](image.png)
+
 ## Alunos
 
 - Ana Flávia Freiria Rodrigues
