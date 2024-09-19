@@ -13,6 +13,7 @@
 ### Onde consigo achar o relatório?
 
 O relatório em PDF pode ser encontrado dentra da pasta `public` com o nome `relatorio.pdf`.
+Você também pode [conferir o relatório em LaTeX pelo Overleaf](https://pt.overleaf.com/read/pryqfsjfdjbh#106ee4)
 
 ### Como mudar o labirinto que será lido?
 
