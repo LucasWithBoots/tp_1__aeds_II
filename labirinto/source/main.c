@@ -1,3 +1,10 @@
+/*
+ALUNOS:
+- Ana Flávia Freiria Rodrigues
+- Lucas Carrijo Ferrari
+- Raissa Nunes Peret
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -125,7 +132,8 @@ int main() {
     int visitado[TAMANHO_LABIRINTO][TAMANHO_LABIRINTO];
     memset(visitado, 0, sizeof(visitado));
 
-    const char *caminhoArquivo = "../labirintos/labirinto1.txt"; // Caminho
+    // Caminho do arquivo do labirinto
+    const char *caminhoArquivo = "../labirintos/labirinto1.txt";
 
     // Ler o labirinto do arquivo
     if (!lerLabirinto(labirinto, caminhoArquivo)) {
